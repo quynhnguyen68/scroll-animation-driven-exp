@@ -1,6 +1,67 @@
 @layer layout, gallery;
 
-/* Instructions: replace this line with your solution */
+/* Parallax Background */
+@keyframes move-background {
+	from {
+		background-position: 50% 0%;
+	}
+	to {
+		background-position: 50% 100%;
+	}
+}
+body {
+	animation: auto linear move-background;
+	animation-timeline: scroll();
+}
+
+/* Progress Bar */
+@keyframes adjust-progress {
+	from {
+		transform: scaleX(calc(1 / var(--num-images)));
+	}
+	to {
+		transform: scaleX(1);
+	}
+}
+
+.gallery__scrollcontainer {
+	scroll-timeline-name: --gallery-is-scrolling;
+	scroll-timeline-axis: inline;
+}
+.gallery__progress {
+	animation: auto linear adjust-progress;
+	animation-timeline: --gallery-is-scrolling;
+}
+
+/* Image Effect */
+@keyframes animate-in {
+	from {
+		opacity: 0;
+		clip-path: inset(50% 0% 50% 0%);
+	}
+	to {
+		opacity: 1;
+		clip-path: inset(0% 0% 0% 0%);
+	}
+}
+
+@keyframes animate-out {
+	from {
+		opacity: 1;
+		left: 1px;
+		clip-path: inset(0% 0% 0% 0%);
+	}
+	to {
+		opacity: 0;
+		clip-path: inset(50% 0% 50% 0%);
+	}
+}
+
+/* .gallery__entry {
+	animation: auto linear animate-in, auto linear animate-out;
+	animation-timeline: view(inline);
+	animation-range: entry, exit;
+} */
 
 @layer gallery {
 	.gallery {
@@ -54,12 +115,12 @@
 	}
 
 	body {
-		background: #fff url(https://source.unsplash.com/c2WnkX7-1K4) no-repeat 50% 0% / cover;
+		/* background: #fff url(https://source.unsplash.com/c2WnkX7-1K4) no-repeat 50% 0% / cover; */
 	}
 
 	main {
 		font-weight: 300;
-		width: 80vw;
+		width: 50vw;
 		padding: 5vw;
 		max-width: 40em;
 		margin: 0 auto;
